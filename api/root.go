@@ -10,6 +10,7 @@ func Activate(port int) {
 	address := fmt.Sprintf(":%d", port)
 
 	r := mux.NewRouter()
+	RegisterCovid19HTTPAPI(r)
 
 	err := http.ListenAndServe(address, r)
 	if err != nil {

@@ -18,10 +18,8 @@ func init() {
 	viper.SetDefault("CONFIG_FILENAME", ".env")
 	viper.BindEnv("CONFIG_FILENAME")
 
-	viper.SetDefault("MOVIE_SERVER_ADDRESS", "http://localhost")
-	viper.BindEnv("MOVIE_SERVER_ADDRESS")
-	viper.SetDefault("MOVIE_API_KEY", "api-key")
-	viper.BindEnv("MOVIE_API_KEY")
+	viper.SetDefault("ADDRESS", "http://localhost")
+	viper.BindEnv("ADDRESS")
 }
 
 func Parse() (config Config, err error) {

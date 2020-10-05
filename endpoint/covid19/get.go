@@ -3,7 +3,6 @@ package covid19
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/tech-showcase/covid19-service/model"
 	"github.com/tech-showcase/covid19-service/service"

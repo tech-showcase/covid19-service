@@ -18,7 +18,7 @@ type (
 		To      time.Time `json:"to"`
 	}
 	GetCovid19Response struct {
-		model.Covid19Data
+		model.Covid19Data `json:"data"`
 	}
 )
 

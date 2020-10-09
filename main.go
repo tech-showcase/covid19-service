@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/tech-showcase/covid19-service/cmd"
 	"github.com/tech-showcase/covid19-service/config"
+	"github.com/tech-showcase/covid19-service/helper"
 )
 
 func init() {
@@ -11,6 +12,13 @@ func init() {
 	config.Instance, err = config.Parse()
 	if err != nil {
 		panic(err)
+	}
+
+	helper.LoggerInstance = helper.NewLogger()
+
+	helper.TracerInstance, _, err = helper.NewTracer(config.Instance.ServiceName, config.Instance.Tracer.AgentAddress)
+	if err != nil {
+		helper.LoggerInstance.Log("NewTracer", err)
 	}
 }
 

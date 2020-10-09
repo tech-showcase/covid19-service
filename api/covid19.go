@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/tech-showcase/covid19-service/config"
 	"github.com/tech-showcase/covid19-service/endpoint/covid19"
+	"github.com/tech-showcase/covid19-service/helper"
 	"github.com/tech-showcase/covid19-service/model"
 	"github.com/tech-showcase/covid19-service/service"
 	"github.com/tech-showcase/covid19-service/transport"
@@ -12,8 +13,10 @@ import (
 
 func RegisterCovid19HTTPAPI(r *mux.Router) {
 	configInstance := config.Instance
+	tracerInstance := helper.TracerInstance
+
 	covid19Repo := model.NewCovid19Repo(configInstance.Address)
 	covid19Service := service.NewCovid19Service(covid19Repo)
-	covid19Endpoint := covid19.NewCovid19Endpoint(covid19Service)
+	covid19Endpoint := covid19.NewCovid19Endpoint(covid19Service, tracerInstance)
 	r.Handle("/covid19", transport.MakeGetCovid19HTTPHandler(covid19Endpoint.Get)).Methods(http.MethodGet)
 }

@@ -6,7 +6,13 @@ import (
 
 type (
 	Config struct {
-		Address string `json:"address"`
+		ServiceName string `json:"service_name"`
+		Address     string `json:"address"`
+		Tracer      Tracer `json:"tracer"`
+	}
+
+	Tracer struct {
+		AgentAddress string `json:"agent_address"`
 	}
 )
 
@@ -18,8 +24,14 @@ func init() {
 	viper.SetDefault("CONFIG_FILENAME", ".env")
 	viper.BindEnv("CONFIG_FILENAME")
 
+	viper.SetDefault("SERVICE_NAME", "covid19-service")
+	viper.BindEnv("SERVICE_NAME")
+
 	viper.SetDefault("ADDRESS", "http://localhost")
 	viper.BindEnv("ADDRESS")
+
+	viper.SetDefault("TRACER_AGENT_ADDRESS", "localhost:5775")
+	viper.BindEnv("TRACER_AGENT_ADDRESS")
 }
 
 func Parse() (config Config, err error) {
@@ -45,7 +57,11 @@ func getConfigFile() (configFilepath string, configFilename string) {
 
 func getConfig() (config Config) {
 	config = Config{
-		Address: viper.Get("ADDRESS").(string),
+		ServiceName: viper.Get("SERVICE_NAME").(string),
+		Address:     viper.Get("ADDRESS").(string),
+		Tracer: Tracer{
+			AgentAddress: viper.Get("TRACER_AGENT_ADDRESS").(string),
+		},
 	}
 	return
 }

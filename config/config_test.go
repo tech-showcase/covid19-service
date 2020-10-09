@@ -8,7 +8,11 @@ import (
 
 func TestParse(t *testing.T) {
 	expectedOutput := Config{
-		Address: "http://dummy.address/",
+		ServiceName: "dummy-service-name",
+		Address:     "http://dummy.address/",
+		Tracer: Tracer{
+			AgentAddress: "dummy-tracer-agent-address",
+		},
 	}
 
 	os.Setenv("CONFIG_FILEPATH", "..")

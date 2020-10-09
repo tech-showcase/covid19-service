@@ -16,7 +16,7 @@ func MakeGetCovid19HTTPHandler(getCovid19Endpoint endpoint.HTTPEndpoint, tracer 
 		getCovid19Endpoint.Endpoint,
 		getCovid19Endpoint.Decoder,
 		getCovid19Endpoint.Encoder,
-		[]httptransport.ServerOption{}...,
+		options...,
 	)
 
 	return

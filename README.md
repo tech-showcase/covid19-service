@@ -13,7 +13,9 @@ The whole system will be used to present **micro-services without an orchestrato
 - Install docker
 - Create config file `.env` under root dir which contains following content
 ```
+SERVICE_NAME=covid19-service
 ADDRESS=https://api.covid19api.com
+TRACER_AGENT_ADDRESS=localhost:5775
 ```
 - Fill env var `CONFIG_FILEPATH` with directory path where config file is contained
 - Fill env var `CONFIG_FILENAME` with the name of config file (e.g `.env`)

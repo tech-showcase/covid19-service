@@ -22,7 +22,7 @@ TRACER_AGENT_ADDRESS=localhost:5775
 - Build and run docker image as below
 ```shell script
 $ docker build -t covid19-service .
-$ docker run -p 8083:8080 covid19-service
+$ docker run -p 8083:8080 covid19-service server
 ```
 
 ### Tech / Dependency

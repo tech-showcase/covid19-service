@@ -18,6 +18,6 @@ func RegisterCovid19HTTPAPI(r *mux.Router) {
 
 	covid19Repo := model.NewCovid19Repo(configInstance.Address)
 	covid19Service := service.NewCovid19Service(covid19Repo)
-	covid19Endpoint := covid19.NewCovid19Endpoint(covid19Service, tracerInstance)
+	covid19Endpoint := covid19.NewCovid19Endpoint(covid19Service, tracerInstance, loggerInstance)
 	r.Handle("/covid19", transport.MakeGetCovid19HTTPHandler(covid19Endpoint.Get, tracerInstance, loggerInstance)).Methods(http.MethodGet)
 }

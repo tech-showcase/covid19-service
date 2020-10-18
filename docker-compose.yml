@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  covid19-service:
+    image: covid19-service
+    command: server
+    ports:
+      - 8083:8080
+    networks:
+      - service-discovery
+    environment:
+      ADDRESS: https://api.covid19api.com
+      TRACER_AGENT_ADDRESS: jaeger-tracing:5775
+    depends_on:
+      - consul-server
+
+networks:
+  api-gateway:
+    external:
+      name: service-discovery_service-discovery

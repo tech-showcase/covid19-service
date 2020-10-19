@@ -7,14 +7,17 @@ services:
     ports:
       - 8083:8080
     networks:
-      - service-discovery
+      - covid19-service
+      - observability
     environment:
       ADDRESS: https://api.covid19api.com
       TRACER_AGENT_ADDRESS: jaeger-tracing:5775
-    depends_on:
-      - consul-server
+#    depends_on:
+#      - consul-server
 
 networks:
-  api-gateway:
+  covid19-service:
+    driver: bridge
+  observability:
     external:
-      name: service-discovery_service-discovery
+      name: observability_observability

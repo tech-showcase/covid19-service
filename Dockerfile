@@ -8,4 +8,6 @@ COPY . .
 RUN go mod tidy
 RUN CGO_ENABLED=0 go build -o /go/bin/app
 
+RUN mkdir -p /log
+
 ENTRYPOINT ["/go/bin/app"]

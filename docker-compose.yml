@@ -9,11 +9,28 @@ services:
     networks:
       - covid19-service
       - observability
+    volumes:
+      - covid19-service-log:/log
     environment:
       ADDRESS: https://api.covid19api.com
       TRACER_AGENT_ADDRESS: jaeger-tracing:5775
+      LOG_FILEPATH: /log/server.log
 #    depends_on:
 #      - consul-server
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.7.0
+    volumes:
+      - ./deployment/elastic-stack/filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml
+      - covid19-service-log:/log
+    networks:
+      - observability
+    depends_on:
+      - covid19-service
+
+volumes:
+  covid19-service-log:
+    driver: local
 
 networks:
   covid19-service:

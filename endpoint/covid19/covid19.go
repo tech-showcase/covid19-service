@@ -20,6 +20,7 @@ func NewCovid19Endpoint(svc service.Covid19Service, tracer stdopentracing.Tracer
 	getCovid19Endpoint := makeGetCovid19Endpoint(svc)
 	getCovid19Endpoint = middleware.ApplyTracerClient("getCovid19-endpoint", getCovid19Endpoint, tracer)
 	getCovid19Endpoint = middleware.ApplyLogger("getCovid19", getCovid19Endpoint, logger)
+	getCovid19Endpoint = middleware.ApplyMetrics("covid19", "get", getCovid19Endpoint)
 	covid19Endpoint.Get = generalEndpoint.HTTPEndpoint{
 		Endpoint: getCovid19Endpoint,
 		Decoder:  decodeGetCovid19Request,

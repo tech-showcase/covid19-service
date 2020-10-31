@@ -11,6 +11,7 @@ func Activate(port int) {
 
 	r := mux.NewRouter()
 	RegisterCovid19HTTPAPI(r)
+	RegisterObservabilityHTTPAPI(r)
 
 	err := http.ListenAndServe(address, r)
 	if err != nil {
